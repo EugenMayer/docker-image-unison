@@ -1,0 +1,6 @@
+check process unison with pidfile /var/run/unison.pid
+  # Wait for supervisor to be ready, then start unison and store the PID
+  start program = "/bin/bash -c 'while [ ! -S /tmp/supervisor.sock ]; do sleep 1; done && supervisorctl start unison && supervisorctl pid unison > /var/run/unison.pid'"
+  stop program = "/bin/bash -c 'supervisorctl stop unison && rm -rf /var/run/unison.pid'"
+  # Restart if CPU usage is high based on cycles configuration. Value is replaced inline during startup
+  if cpu usage > 50% for {{MONIT_HIGH_CPU_CYCLES}} cycles then restart
