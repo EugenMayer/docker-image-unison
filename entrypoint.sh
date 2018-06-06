@@ -83,6 +83,20 @@ if [ "$1" == 'supervisord' ]; then
 	################### ################### ###################
     chown -R ${OWNER_UID} /unison
     chown ${OWNER_UID} /tmp/unison.log
+    # If some files/dirs are generated in sync volume before inital sync
+    # Unison may fail to use them if they don't have the adequate UID
+    chown -R ${OWNER_UID} ${APP_VOLUME}
+    # Export default variables used in supervisor
+    # If they don't exist, supervisor won't run
+    export UNISON_SRC=${UNISON_SRC:-}
+    export UNISON_DEST=${UNISON_DEST:-}
+    # If src is not given, by default launch a socket
+    if [ -z $UNISON_SRC ]; then
+      export UNISON_ARGS=${UNISON_ARGS:--socket 5000}
+    fi
+    export UNISON_ARGS=${UNISON_ARGS:-}
+    # By default ignore .git
+    export UNISON_WATCH_ARGS=${UNISON_WATCH_ARGS:--ignore='Name .git'}
 fi
 
 exec "$@"
