@@ -1,6 +1,7 @@
 ## Usage
 
-This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published on [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/)
+This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published on [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/).
+
 A lot of credits go to [mickaelperrin](https://github.com/mickaelperrin) - most of the work has been done by him initially.
 
 ## What does it do ?
@@ -10,7 +11,7 @@ exist, it is created/modified on startup.
 
 You can also combine it with OSXFS as its done in docker-sync native_osx.
 
-## Documetation
+## Documentation
 
 You can configure how unison runs by using the following ENV variables:
  
@@ -19,7 +20,7 @@ You can configure how unison runs by using the following ENV variables:
  - `MAX_INOTIFY_WATCHES` increases the limit of inotify watches if you need to sync folders with lots of files. 
 
 ## Credits
-- Big thanks at [mickaelperrin](https://github.com/mickaelperrin) for putting hard work into getting this production ready
+- Big thanks at [mickaelperrin](https://github.com/mickaelperrin) for putting hard work into getting this production ready.
 
 ## License
 What the others did, so:
