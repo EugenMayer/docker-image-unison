@@ -3,7 +3,7 @@ FROM alpine:edge
 ARG UNISON_VERSION=2.51.2
 
 RUN apk update \
-    && apk add --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.10/main" binutils=2.32-r0 \
+    && apk add --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.10/main" binutils=2.33.1-r0 \
     && apk add --no-cache --virtual .build-deps \
         build-base curl git ocaml=4.08.1-r0 \
     && apk add --no-cache \
