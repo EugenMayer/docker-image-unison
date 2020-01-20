@@ -1,11 +1,28 @@
 FROM alpine:edge
 
+ARG OCAML_VERSION=4.08.1
+
+RUN apk update \
+    && apk add --no-cache --virtual .build-deps build-base coreutils \
+	&& wget http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz \
+	&& tar xvf ocaml-${OCAML_VERSION}.tar.gz -C /tmp \
+	&& cd /tmp/ocaml-${OCAML_VERSION} \
+    && ./configure \
+    && make world \
+    && make opt \
+    && umask 022 \
+    && make install \
+    && make clean \
+    && apk del .build-deps  \
+	&& rm -rf /tmp/ocaml-${OCAML_VERSION} \
+	&& rm /ocaml-${OCAML_VERSION}.tar.gz
+
 ARG UNISON_VERSION=2.51.2
 
 RUN apk update \
     && apk add --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.10/main" binutils=2.33.1-r0 \
     && apk add --no-cache --virtual .build-deps \
-        build-base curl git ocaml=4.08.1-r0 \
+        build-base curl git \
     && apk add --no-cache \
         bash inotify-tools monit supervisor rsync ruby \
     && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
