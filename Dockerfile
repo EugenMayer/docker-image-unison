@@ -20,7 +20,7 @@ RUN apk update \
 ARG UNISON_VERSION=2.51.2
 
 RUN apk update \
-    && apk add --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.10/main" binutils=2.33.1-r0 \
+    && apk add --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.10/main" binutils=2.34-r0 \
     && apk add --no-cache --virtual .build-deps \
         build-base curl git \
     && apk add --no-cache \
