@@ -53,8 +53,6 @@ RUN mkdir -p /docker-entrypoint.d \
  && chmod +x /entrypoint.sh \
  && mkdir -p /etc/supervisor.conf.d \
  && mkdir /unison \
- && touch /tmp/unison.log \
- && chmod u=rw,g=rw,o=rw /tmp/unison.log \
  && chmod +x /usr/local/bin/precopy_appsync \
  && chmod u=rw,g=,o= /etc/monitrc
 
