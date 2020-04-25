@@ -77,12 +77,6 @@ if [ "$1" == 'supervisord' ]; then
 
 	export MONIT_ENABLE
 	export MONIT_INTERVAL
-
-	################### ################### ###################
-	################### /now unison specific/ ###################
-	################### ################### ###################
-    chown -R ${OWNER_UID} /unison
-    chown ${OWNER_UID} /tmp/unison.log
 fi
 
 exec "$@"
