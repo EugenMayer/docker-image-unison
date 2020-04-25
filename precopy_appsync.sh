@@ -12,7 +12,7 @@ if [ ! -f /unison/initial_sync_finished ]; then
 	echo "chown ing file to uid $OWNER_UID"
 	chown -R ${OWNER_UID} ${APP_VOLUME}
 	touch /unison/initial_sync_finished
-	echo "initial sync done using unison" >> /tmp/unison.log
+	echo "initial sync done using unison"
 else
 	echo "skipping initial copy with unison"
 fi
