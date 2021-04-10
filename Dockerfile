@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-ARG OCAML_VERSION=4.08.1
+ARG OCAML_VERSION=4.12.0
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps build-base coreutils \
@@ -17,7 +17,7 @@ RUN apk update \
 	&& rm -rf /tmp/ocaml-${OCAML_VERSION} \
 	&& rm /ocaml-${OCAML_VERSION}.tar.gz
 
-ARG UNISON_VERSION=2.51.2
+ARG UNISON_VERSION=2.51.3.70
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
