@@ -17,7 +17,7 @@ RUN apk update \
 	&& rm -rf /tmp/ocaml-${OCAML_VERSION} \
 	&& rm /ocaml-${OCAML_VERSION}.tar.gz
 
-ARG UNISON_VERSION=2.51.3.70
+ARG UNISON_VERSION=2.51.3
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
