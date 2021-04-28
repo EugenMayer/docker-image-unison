@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.12
 
 ARG OCAML_VERSION=4.12.0
 
