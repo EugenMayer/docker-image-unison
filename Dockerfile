@@ -17,7 +17,7 @@ RUN apk update \
 	&& rm -rf /tmp/ocaml-${OCAML_VERSION} \
 	&& rm /ocaml-${OCAML_VERSION}.tar.gz
 
-ARG UNISON_VERSION=2.51.3
+ARG UNISON_VERSION=2.51.4_rc2
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
@@ -26,16 +26,16 @@ RUN apk update \
         bash inotify-tools monit supervisor rsync ruby \
     && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
     && cd /tmp/unison-${UNISON_VERSION} \
-    && curl https://github.com/bcpierce00/unison/commit/23fa1292.diff?full_index=1 -o patch.diff \
-    && git apply patch.diff \
-    && rm patch.diff \
+    # && curl https://github.com/bcpierce00/unison/commit/23fa1292.diff?full_index=1 -o patch.diff \
+    # && git apply patch.diff \
+    # && rm patch.diff \
     && sed -i -e 's/GLIBC_SUPPORT_INOTIFY 0/GLIBC_SUPPORT_INOTIFY 1/' src/fsmonitor/linux/inotify_stubs.c \
     && make UISTYLE=text NATIVE=true STATIC=true \
     && cp src/unison src/unison-fsmonitor /usr/local/bin \
     && apk del binutils .build-deps  \
     && apk add --no-cache libgcc libstdc++ \
     && rm -rf /tmp/unison-${UNISON_VERSION} \
-    && apk add --no-cache --repository http://dl-4.alpinelinux.org/alpine/edge/testing/ shadow \
+    && apk add --no-cache --repository http://dl-4.alpinelinux.org/alpine/v3.12/testing/ shadow \
     && apk add --no-cache tzdata
 
 # These can be overridden later
