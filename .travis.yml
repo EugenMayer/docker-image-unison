@@ -8,6 +8,12 @@ env:
 jobs:
   include:
     - name: 'default'
-      script: docker build . -t eugenmayer/unison
+      script: docker build . -t eugenmayer/unison:latest
 
 script: docker build  --build-arg "OCAML_VERSION=$OCAML_VERSION" --build-arg "UNISON_VERSION=$UNISON_VERSION" . -t eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION
+
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
