@@ -8,6 +8,12 @@ The image is used by docker-sync by default, unless it is overridden using the c
 
 where `ocaml-version` is any OCaml version available as source-code [here](http://caml.inria.fr/pub/distrib/) and `unison-version` is any Unison version available as source code [here](https://github.com/bcpierce00/unison/releases/).
 
+Or for arm base builds change the image using BASE_IMAGE
+
+`docker build --build-arg "BASE_IMAGE=amd64/alpine:3.12" --build-arg "OCAML_VERSION=<ocaml-version>" --build-arg "UNISON_VERSION=<unison-version>" -t custom-docker-image-unison .`
+
+### Build Examples
+
 For example,
 
 `docker build --build-arg "OCAML_VERSION=4.12.0" --build-arg "UNISON_VERSION=2.51.3" -t custom-docker-image-unison .`
