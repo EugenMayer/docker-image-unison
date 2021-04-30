@@ -1,19 +1,21 @@
 services:
-  - docker
-
+- docker
 env:
+  matrix:
   - OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
   - OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
-
+  global:
+    secure: HZmlv8szTUcXodJOmqSv/J3RbIz8YyzS/AZgOemN219HcqFjr15+hUzIOjg3j8JLqU1/SRikUj3NaH2cWIyRkCBX1XBMEl1tqtNBkU2PumyHE1TdH4HzpsB8ORhxPcl+G+r7pQAScY3aeEllgmz3Ue6F7GWQHHjkSbdBUJfqzTeUY90136sZYFtWrDcSJb7ElO0vpGSAFK0n8Ibz8aO9MUboQYFSLNEGJJHBrDicsFQ1+8MHwMHPTq7GliPCKXzMU1b2CKOdpSLsaWg8rOwvpk/nQmcMe80TvKjief91g3oZg7/Ym+gmtNqz7NXhN5wsc42HUG+J6y493OsRdxAJbqaJ3+to+/u1HJa/D0o2GJBvv4ZrpVbqz8aUGE3K/AJcN+olykbht+NQbDQI7Q+lEIDnpOJTAJ0hOEFcVON5I11x7FzvxuxhZxIK9Zvv/gvAYv4MxkH0pdP7NCb8ZOA3KppFQ5R/Yr5JWJhTys0wGCit1bMqjidc20Lgj6b1JOI7g+uvbQeONdzzoaoGd0dmH41M1mMChIz4FzYO+zG/eogTbtsYvi/zHJyYB67Y55qLaQZrtGNn5QvRXWZdZB1fby/ZGq83vOQVLgedLjevmrgUXn15oEnhnSbw5G5SF0CGY4y2mmtU3Oi/7GmuKvm3yWdiKx9UCXLCU4x5mHsllMM=
 jobs:
   include:
-    - name: 'default'
-      script: docker build . -t eugenmayer/unison:latest
-
-script: docker build  --build-arg "OCAML_VERSION=$OCAML_VERSION" --build-arg "UNISON_VERSION=$UNISON_VERSION" . -t eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION
-
+  - name: default
+    script: docker build . -t eugenmayer/unison:latest
+script: docker build  --build-arg "OCAML_VERSION=$OCAML_VERSION" --build-arg "UNISON_VERSION=$UNISON_VERSION"
+  . -t eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION
 deploy:
   provider: script
   script: bash docker_push.sh
   on:
     branch: master
+dd:
+  secure: i53RJua7VXCECwuZpeQzxLFaKJrmFmAiZ6eaLFQmdprEsz7fzboG8mN/mB/GE12ShYu+EWu8ALhVEG9i+y9ZBsSiUjmJZv4Zo4MLBkh+agokM81GaQ+qu3Y9XWIuEcQH3xuGg+HVLMrtPYF/xSA77ucbLlQK2Gd4EJ9m5TE55z0IAKOjLY13n/zJBO55McSWkoGtAGtvW9j7t2UKqjlk3BxV7AkMK0aHcb9dKudhFzbX9tLKAv9rznLMneFXXdUHhaPyRwj3bLQu/H+Gx3qSyRaRjRJVTS/Ab0NsLb+cJsESIyLyw/wfymOJpgI0N3jA3Tlzaepjyj9WkckGBX0cDpKTJ9HbCKGkKhU6mYhb6LdVP6+8WSJQE3y5nL+yN6mlZRNTxCgoJqYijvjHXopQmB18HUEaNEmtYAWTOYcAwn0nEgDhL+olROriu4RwuvCHFZZoGX8YtV6KW2DnqM0WZ4CJCo1sXm8DX6R5YEkYN5Xbmb37bH8EnCF2UtBV604hqFzytnBgu7BnCZNmjaDtSoyavJoKVeCYpi+6W/X44xqKLyTFrjHa9a6hwF8alMhtqIJ/7DCAsXOr/JQTii3/5OiAzuMwd6XBlvJ5AvY9tuH8uSOqSpC66Oahbwm9e0av+rUFLsjdmbFBWrqI48zY2KbNEUhz+sKpriagtWUImLU=
