@@ -8,7 +8,20 @@ The tags are structured as `eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$AR
 eugenmayer/unison:2.51.3-4.12.0-AMD64
 ```
 
+### What does it do ?
+
+This image simply runs an unison server on the internal port `5000` with the specified user/uid. If the user/uid doesn't
+exist, it is created/modified on startup.
+
+You can also combine it with OSXFS as its done in docker-sync native_osx.
+
+### Docker Sync related
+
 The image is used by docker-sync by default, unless it is overridden using the configuration option _<sync_strategy>\_image_ in [docker-sync.yml](https://docker-sync.readthedocs.io/en/latest/getting-started/configuration.html#references). The image uses the latest OCaml and Unison versions available at the time of release. Incase other versions needs to be used (which matches the versions used with docker-sync on the host), build a new docker-image-unison image as follows:
+
+## Building
+
+You can build your own image using
 
 `docker build --build-arg "OCAML_VERSION=<ocaml-version>" --build-arg "UNISON_VERSION=<unison-version>" -t custom-docker-image-unison .`
 
@@ -29,13 +42,6 @@ The configuration in the docker-sync.yml would then be:
 _unison_image_: 'custom-docker-image-unison'
 
 A lot of credits go to [mickaelperrin](https://github.com/mickaelperrin) - most of the work has been done by him initially.
-
-## What does it do ?
-
-This image simply runs an unison server on the internal port `5000` with the specified user/uid. If the user/uid doesn't
-exist, it is created/modified on startup.
-
-You can also combine it with OSXFS as its done in docker-sync native_osx.
 
 ## Documentation
 
