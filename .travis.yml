@@ -1,13 +1,12 @@
 services:
   - docker
 
+env:
+  - OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
+  - OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
 jobs:
   include:
-    - name "default":
+    - name: 'default'
       script: docker build . -t eugenmayer/unison
 
-    - name "2.51.3":
-      script: docker build  --build-arg "OCAML_VERSION=4.12.0" --build-arg "UNISON_VERSION=2.51.3" . -t eugenmayer/unison:2.51.3
-
-    - name "2.51.4":
-      script: docker build  --build-arg "OCAML_VERSION=4.12.0" --build-arg "UNISON_VERSION=2.51.4_rc2" . -t eugenmayer/unison:2.51.4
+script: docker build  --build-arg "OCAML_VERSION=$OCAML_VERSION" --build-arg "UNISON_VERSION=$UNISON_VERSION" . -t eugenmayer/unison:2.51.3
