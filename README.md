@@ -2,6 +2,12 @@
 
 This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published on [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/).
 
+The tags are structured as `eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH` so for example
+
+```
+eugenmayer/unison:2.51.3-4.12.0-AMD64
+```
+
 The image is used by docker-sync by default, unless it is overridden using the configuration option _<sync_strategy>\_image_ in [docker-sync.yml](https://docker-sync.readthedocs.io/en/latest/getting-started/configuration.html#references). The image uses the latest OCaml and Unison versions available at the time of release. Incase other versions needs to be used (which matches the versions used with docker-sync on the host), build a new docker-image-unison image as follows:
 
 `docker build --build-arg "OCAML_VERSION=<ocaml-version>" --build-arg "UNISON_VERSION=<unison-version>" -t custom-docker-image-unison .`
