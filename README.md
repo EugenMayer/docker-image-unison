@@ -29,7 +29,7 @@ where `ocaml-version` is any OCaml version available as source-code [here](http:
 
 Or for arm base builds change the image using BASE_IMAGE
 
-`docker build --build-arg "BASE_IMAGE=amd64/alpine:3.12" --build-arg "OCAML_VERSION=<ocaml-version>" --build-arg "UNISON_VERSION=<unison-version>" -t custom-docker-image-unison .`
+`docker build --build-arg "BASE_IMAGE=arm64v8/alpine:3.12" --build-arg "OCAML_VERSION=<ocaml-version>" --build-arg "UNISON_VERSION=<unison-version>" -t custom-docker-image-unison .`
 
 ### Build Examples
 
