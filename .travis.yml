@@ -4,16 +4,16 @@ env:
   matrix:
     - ARCH="AMD64" BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
     - ARCH="AMD64" BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
-    - ARCH="ARM64" BASE_IMAGE=amd64/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
-    - ARCH="ARM64" BASE_IMAGE=amd64/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
+    - ARCH="ARM64" BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
+    - ARCH="ARM64" BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
 jobs:
   include:
     - name: default
       script: docker build . -t eugenmayer/unison:latest
   allow_failures:
     # yet arm builds are option
-    - env: BASE_IMAGE=amd64/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
-    - env: BASE_IMAGE=amd64/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
+    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
+    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
 
 script: docker build  --build-arg "OCAML_VERSION=$OCAML_VERSION" --build-arg "UNISON_VERSION=$UNISON_VERSION"
   . -t eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH
