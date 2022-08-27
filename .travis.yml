@@ -25,7 +25,12 @@ script: docker build
     .
 
 deploy:
-  provider: script
-  script: bash docker_push.sh
-  on:
-    branch: master
+  - provider: script
+    script: bash docker_push.sh
+    on:
+      branch: master
+  - provider: script
+    script: bash docker_combine.sh
+    on:
+      branch: master
+      arch: amd64  # only run once per OCAML/UNISON combination
