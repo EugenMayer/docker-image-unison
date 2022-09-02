@@ -2,7 +2,7 @@ ARG BASE_IMAGE=alpine:3.12
 FROM $BASE_IMAGE
 
 ARG OCAML_VERSION=4.12.0
-ARG UNISON_VERSION=2.51.3
+ARG UNISON_VERSION=2.52.1
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps build-base coreutils \
