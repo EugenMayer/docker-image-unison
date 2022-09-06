@@ -26,11 +26,6 @@ RUN apk update \
     bash inotify-tools monit supervisor rsync ruby \
     && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
     && cd /tmp/unison-${UNISON_VERSION} \
-    # needed for < 2.51.4 with OCALM 4.12 - see https://github.com/bcpierce00/unison/pull/480
-    # and https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/unison.rb#L13
-    && curl https://github.com/bcpierce00/unison/commit/14b885316e0a4b41cb80fe3daef7950f88be5c8f.patch?full_index=1 -o patch.diff \
-    && ([[ "$UNISON_VERSION" == "2.51.3" ]] && git apply patch.diff); \
-    rm patch.diff \
     && sed -i -e 's/GLIBC_SUPPORT_INOTIFY 0/GLIBC_SUPPORT_INOTIFY 1/' src/fsmonitor/linux/inotify_stubs.c \
     && make UISTYLE=text NATIVE=true STATIC=true \
     && cp src/unison src/unison-fsmonitor /usr/local/bin \
