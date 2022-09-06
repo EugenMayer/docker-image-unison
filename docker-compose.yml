@@ -4,4 +4,4 @@ services:
     build:
       context: .
     container_name: 'unison'
-    image: 'eugenmayer/unison:2.51.2.0'
+    image: 'eugenmayer/unison:2.52.1-4.12.0'
