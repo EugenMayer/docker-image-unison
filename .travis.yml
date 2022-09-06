@@ -5,13 +5,13 @@ jobs:
   include:
     - name: default
       script: docker build . -t eugenmayer/unison:latest
-    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
+    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
       arch: amd64
-    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
+    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
       arch: amd64
-    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.3
+    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
       arch: arm64
-    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.51.4_rc2
+    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
       arch: arm64
   allow_failures:
     # yet arm builds are option

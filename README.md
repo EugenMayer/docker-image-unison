@@ -5,7 +5,7 @@ This image is the unison-image for [docker-sync](https://github.com/EugenMayer/d
 The tags are structured as `eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH` so for example
 
 ```
-eugenmayer/unison:2.51.3-4.12.0-AMD64
+eugenmayer/unison:2.52.1-4.12.0-AMD64
 ```
 
 ### What does it do ?
@@ -35,7 +35,7 @@ Or for arm base builds change the image using BASE_IMAGE
 
 For example,
 
-`docker build --build-arg "OCAML_VERSION=4.12.0" --build-arg "UNISON_VERSION=2.51.3" -t custom-docker-image-unison .`
+`docker build --build-arg "OCAML_VERSION=4.12.0" --build-arg "UNISON_VERSION=2.52.1" -t custom-docker-image-unison .`
 
 The configuration in the docker-sync.yml would then be:
 
