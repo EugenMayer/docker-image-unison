@@ -5,7 +5,8 @@ This image is the unison-image for [docker-sync](https://github.com/EugenMayer/d
 The tags are structured as `eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH` so for example
 
 ```
-eugenmayer/unison:2.52.1-4.12.0-AMD64
+# this will pull the AMD or ARM version, depending on your current arch
+eugenmayer/unison:2.52.1-4.12.0
 ```
 
 ### What does it do ?
