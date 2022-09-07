@@ -13,9 +13,6 @@ jobs:
       arch: arm64
     - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
       arch: arm64
-  allow_failures:
-    # yet arm builds are option
-    - arch: arm64
 
 script: docker build
     --build-arg BASE_IMAGE=$BASE_IMAGE
