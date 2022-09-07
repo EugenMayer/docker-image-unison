@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        versiosn:
+        versions:
           - { ocalm: "4.12.0", unison: "2.52.1" }
     steps:
       - name: Checkout
