@@ -2,6 +2,9 @@ name: build-and-push
 
 on: push
 
+env:
+  IMAGE_FQDN: ghcr.io/eugenmayer/unison
+
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -28,10 +31,10 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: eugenmayer/unison:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
-          build-args:
-            - OCAML_VERSION=${{ matrix.versions.ocalm }}
-            - UNISON_VERSION=${{ matrix.versions.unison }}
+          tags: $IMAGE_FQDN:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          build-args: |
+            OCAML_VERSION=${{ matrix.versions.ocalm }}
+            UNISON_VERSION=${{ matrix.versions.unison }}
       # push only on main
       - name: Build and push
         if: github.ref == 'refs/heads/main'
@@ -40,7 +43,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/eugenmayer/unison:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          tags: $IMAGE_FQDN:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
           build-args: |
             OCAML_VERSION=${{ matrix.versions.ocalm }}
             UNISON_VERSION=${{ matrix.versions.unison }}
