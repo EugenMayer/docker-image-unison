@@ -3,27 +3,15 @@ services:
 
 jobs:
   include:
-    - name: default
-      script: docker build . -t eugenmayer/unison:latest
-    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
-      arch: amd64
-    - env: BASE_IMAGE=alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
-      arch: amd64
-    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
-      arch: arm64
-    - env: BASE_IMAGE=arm64v8/alpine:3.12 OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
-      arch: arm64
+    - env: OCAML_VERSION=4.12.0 UNISON_VERSION=2.52.1
 
-script: docker build
-    --build-arg BASE_IMAGE=$BASE_IMAGE
-    --build-arg OCAML_VERSION=$OCAML_VERSION
-    --build-arg UNISON_VERSION=$UNISON_VERSION
-    --tag eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-${TRAVIS_CPU_ARCH^^}
-    .
+script:
+  - docker buildx create --use
+  - docker buildx build --build-arg OCAML_VERSION=$OCAML_VERSION --build-arg UNISON_VERSION=$UNISON_VERSION --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION .
 
 deploy:
-  - provider: script
-    script: bash docker_hub_deploy.sh
-    on:
-      # obviously do not do that on PRs
-      branch: main
+  provider: script
+  script: bash build_and_publish.sh
+  on:
+    branch: main
+      
