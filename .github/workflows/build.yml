@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        versiosn:
+          - { ocalm: "4.12.0", unison: "2.52.1" }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+      - name: Build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: false
+          tags: eugenmayer/unison:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          build-args:
+            - OCAML_VERSION=${{ matrix.versions.ocalm }}
+            - UNISON_VERSION=${{ matrix.versions.unison }}
+      # push only on main
+      - name: Build and push
+        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ghcr.io/eugenmayer/unison:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          build-args:
+            - OCAML_VERSION=${{ matrix.versions.ocalm }}
+            - UNISON_VERSION=${{ matrix.versions.unison }}
