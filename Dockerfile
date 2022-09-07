@@ -9,7 +9,7 @@ RUN echo "UNISON VERSION: ${UNISON_VERSION}"
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
-    && curl -L http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz  | tar zxv -C /tmp \
+    && curl -L http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz --output -  | tar zxv -C /tmp \
     && cd /tmp/ocaml-${OCAML_VERSION} \
     && ./configure \
     && make world \
@@ -21,10 +21,10 @@ RUN apk update \
     && rm -rf /tmp/ocaml-${OCAML_VERSION}
 
 RUN apk update \
-    && apk add --no-cache --virtual .build-deps \
+    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
     && apk add --no-cache \
     bash inotify-tools monit supervisor rsync ruby \
-    && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
+    && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz --output - | tar zxv -C /tmp \
     && cd /tmp/unison-${UNISON_VERSION} \
     && sed -i -e 's/GLIBC_SUPPORT_INOTIFY 0/GLIBC_SUPPORT_INOTIFY 1/' src/fsmonitor/linux/inotify_stubs.c \
     && make UISTYLE=text NATIVE=true STATIC=true \

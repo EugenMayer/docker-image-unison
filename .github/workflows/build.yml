@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         versions:
-          - { ocalm: "4.12.0", unison: "2.52.1" }
+          - { ocaml: "4.12.0", unison: "2.52.1" }
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -31,9 +31,9 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: ${{ env.IMAGE_FQDN }}:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          tags: ${{ env.IMAGE_FQDN }}:${{ matrix.versions.unison }}-${{ matrix.versions.ocaml }}
           build-args: |
-            OCAML_VERSION=${{ matrix.versions.ocalm }}
+            OCAML_VERSION=${{ matrix.versions.ocaml }}
             UNISON_VERSION=${{ matrix.versions.unison }}
       # push only on main
       - name: Build and push
@@ -43,7 +43,7 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.IMAGE_FQDN }}:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
+          tags: ${{ env.IMAGE_FQDN }}:${{ matrix.versions.unison }}-${{ matrix.versions.ocaml }}
           build-args: |
-            OCAML_VERSION=${{ matrix.versions.ocalm }}
+            OCAML_VERSION=${{ matrix.versions.ocaml }}
             UNISON_VERSION=${{ matrix.versions.unison }}
