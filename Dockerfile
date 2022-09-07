@@ -8,7 +8,7 @@ RUN echo "OCAL VERSION: ${OCAML_VERSION}"
 RUN echo "UNISON VERSION: ${UNISON_VERSION}"
 
 RUN apk update \
-    && apk add --no-cache --virtual .build-deps build-base coreutils \
+    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
     && curl -L http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz  | tar zxv -C /tmp \
     && cd /tmp/ocaml-${OCAML_VERSION} \
     && ./configure \
@@ -23,7 +23,6 @@ RUN apk update \
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
-    build-base curl git \
     && apk add --no-cache \
     bash inotify-tools monit supervisor rsync ruby \
     && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
