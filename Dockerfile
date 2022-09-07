@@ -5,9 +5,8 @@ ARG OCAML_VERSION=4.12.0
 ARG UNISON_VERSION=2.52.1
 
 RUN apk update \
-    && apk add --no-cache --virtual .build-deps build-base coreutils \
-    && wget http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz \
-    && tar xvf ocaml-${OCAML_VERSION}.tar.gz -C /tmp \
+    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
+    && curl -L http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz --output -  | tar zxv -C /tmp \
     && cd /tmp/ocaml-${OCAML_VERSION} \
     && ./configure \
     && make world \
@@ -16,15 +15,12 @@ RUN apk update \
     && make install \
     && make clean \
     && apk del .build-deps  \
-    && rm -rf /tmp/ocaml-${OCAML_VERSION} \
-    && rm /ocaml-${OCAML_VERSION}.tar.gz
+    && rm -rf /tmp/ocaml-${OCAML_VERSION}
 
 RUN apk update \
-    && apk add --no-cache --virtual .build-deps \
-    build-base curl git \
-    && apk add --no-cache \
-    bash inotify-tools monit supervisor rsync ruby \
-    && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz | tar zxv -C /tmp \
+    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
+    && apk add --no-cache bash inotify-tools monit supervisor rsync ruby \
+    && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz --output - | tar zxv -C /tmp \
     && cd /tmp/unison-${UNISON_VERSION} \
     && sed -i -e 's/GLIBC_SUPPORT_INOTIFY 0/GLIBC_SUPPORT_INOTIFY 1/' src/fsmonitor/linux/inotify_stubs.c \
     && make UISTYLE=text NATIVE=true STATIC=true \
