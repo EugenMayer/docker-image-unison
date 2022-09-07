@@ -1,6 +1,6 @@
-name: ci
+name: build-and-push
 
-on: [ push]
+on: push
 
 jobs:
   docker:
