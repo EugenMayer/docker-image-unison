@@ -18,8 +18,7 @@ RUN apk update \
     && make install \
     && make clean \
     && apk del .build-deps  \
-    && rm -rf /tmp/ocaml-${OCAML_VERSION} \
-    && rm /ocaml-${OCAML_VERSION}.tar.gz
+    && rm -rf /tmp/ocaml-${OCAML_VERSION}
 
 RUN apk update \
     && apk add --no-cache --virtual .build-deps \
