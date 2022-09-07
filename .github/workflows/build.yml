@@ -41,6 +41,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ghcr.io/eugenmayer/unison:${{ matrix.versions.unison }}-${{ matrix.versions.ocalm }}
-          build-args:
-            - OCAML_VERSION=${{ matrix.versions.ocalm }}
-            - UNISON_VERSION=${{ matrix.versions.unison }}
+          build-args: |
+            OCAML_VERSION=${{ matrix.versions.ocalm }}
+            UNISON_VERSION=${{ matrix.versions.unison }}
