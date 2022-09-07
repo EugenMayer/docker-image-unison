@@ -26,6 +26,7 @@ script: docker build
 
 deploy:
   - provider: script
-    script: bash docker_push.sh
+    script: bash docker_hub_deploy.sh
     on:
-      branch: master
+      # obviously do not do that on PRs
+      branch: main
