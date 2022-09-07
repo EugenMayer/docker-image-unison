@@ -4,6 +4,9 @@ FROM $BASE_IMAGE
 ARG OCAML_VERSION=4.12.0
 ARG UNISON_VERSION=2.52.1
 
+RUN echo "OCAL VERSION: $OCAML_VERSION"
+RUN echo "UNISON VERSION: $UNISON_VERSION"
+
 RUN apk update \
     && apk add --no-cache --virtual .build-deps build-base coreutils \
     && wget http://caml.inria.fr/pub/distrib/ocaml-${OCAML_VERSION:0:4}/ocaml-${OCAML_VERSION}.tar.gz \

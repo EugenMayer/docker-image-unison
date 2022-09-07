@@ -7,6 +7,8 @@ jobs:
 
 script:
   - docker buildx create --use
+  - echo "Running build for OCALM: $OCAML_VERSION"
+  - echo "Running build for UNISON: $UNISON_VERSION"
   - docker buildx build --build-arg OCAML_VERSION=$OCAML_VERSION --build-arg UNISON_VERSION=$UNISON_VERSION --platform linux/arm64/v8,linux/amd64 --tag eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION .
 
 deploy:
