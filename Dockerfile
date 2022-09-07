@@ -18,9 +18,8 @@ RUN apk update \
     && rm -rf /tmp/ocaml-${OCAML_VERSION}
 
 RUN apk update \
-    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils 1\
-    && apk add --no-cache \
-    bash inotify-tools monit supervisor rsync ruby \
+    && apk add --no-cache --virtual .build-deps build-base curl git build-base coreutils \
+    && apk add --no-cache bash inotify-tools monit supervisor rsync ruby \
     && curl -L https://github.com/bcpierce00/unison/archive/v$UNISON_VERSION.tar.gz --output - | tar zxv -C /tmp \
     && cd /tmp/unison-${UNISON_VERSION} \
     && sed -i -e 's/GLIBC_SUPPORT_INOTIFY 0/GLIBC_SUPPORT_INOTIFY 1/' src/fsmonitor/linux/inotify_stubs.c \
