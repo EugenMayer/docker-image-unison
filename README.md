@@ -1,12 +1,14 @@
 ## Usage
 
-This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published on [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/).
+**HINT**: The docker images are no longer published on docker hub - only to ghrc.io!
 
-The tags are structured as `eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH` so for example
+This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published ghcr.io [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/).
+
+The tags are structured as `ghcr.io/eugenmayer/unison:$UNISON_VERSION-$OCAML_VERSION-$ARCH` so for example
 
 ```
 # this will pull the AMD or ARM version, depending on your current arch
-eugenmayer/unison:2.52.1-4.12.0
+docker pull ghcr.io/eugenmayer/unison:2.52.1-4.12.0
 ```
 
 ### What does it do ?
@@ -14,7 +16,7 @@ eugenmayer/unison:2.52.1-4.12.0
 This image simply runs an unison server on the internal port `5000` with the specified user/uid. If the user/uid doesn't
 exist, it is created/modified on startup.
 
-You can also combine it with OSXFS as its done in docker-sync native_osx.
+You can also combine it with OSXFS as it's done in docker-sync native_osx.
 
 ### Docker Sync related
 
