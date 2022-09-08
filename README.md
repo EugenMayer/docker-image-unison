@@ -49,10 +49,13 @@ A lot of credits go to [mickaelperrin](https://github.com/mickaelperrin) - most 
 ## Documentation
 
 You can configure how unison runs by using the following ENV variables:
-
-- `APP_VOLUME` specifies the directory created in the container to store the synced files, `/data` by default
+- `UNISON_SRC` th unison src - default is `/app_sync`
+- `UNISON_DEST` th unison dest  - default is `/host_sync`
+- `APP_VOLUME` specifies the directory created in the container to store the synced files, `/app_sync` by default
 - `OWNER_UID` specifies **the ID of the user** on which the unison process run and the owner of the synced files.
-- `MAX_INOTIFY_WATCHES` increases the limit of inotify watches if you need to sync folders with lots of files.
+- `MAX_INOTIFY_WATCHES` increases the limit of inotify watches if you need to sync folders with lots of files. 
+- `UNISON_ARGS` Pass individual args to unison.
+- `UNISON_WATCH_ARGS` Pass individual watch args for unison
 
 ## Credits
 
