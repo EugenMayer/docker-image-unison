@@ -21,7 +21,7 @@ if [ "$1" == 'supervisord' ]; then
 
 	# if the user with the uid does not exist, create him, otherwise reuse him
 	if ! cut -d: -f3 /etc/passwd | grep -q ${OWNER_UID}; then
-		echo "no user has uid $OWNER_UID"
+		echo "no user has uid $OWNER_UID - creating user"
 
 		# If user doesn't exist on the system
 		useradd -u ${OWNER_UID} dockersync -m
