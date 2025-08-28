@@ -1,6 +1,6 @@
 ## Usage
 
-**HINT**: The docker images are no longer published on docker hub - only to ghrc.io!
+**HINT**: The docker images are no longer published on docker hub - only to ghcr.io!
 
 This image is the unison-image for [docker-sync](https://github.com/EugenMayer/docker-sync) and published ghcr.io [eugenmayer/unison](https://hub.docker.com/r/eugenmayer/unison/).
 
